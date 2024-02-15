@@ -86,12 +86,20 @@ public:
     }
   }
 
+  //This is function for procesing request when no behaviour is defined, or check the responses generater by behaviors
+  virtual void defaultReqProccess(const std::shared_ptr<typename TService::Request> req,
+    std::shared_ptr<typename TService::Response> res)
+  {
+
+  }
+
 private:
   void serviceCallback(
     const std::shared_ptr<typename TService::Request> req,
     std::shared_ptr<typename TService::Response> res)
   {
     onServiceRequestReceived_(req, res);
+    defaultReqProccess(req, res);
   }
   typename rclcpp::Service<TService>::SharedPtr server_;
   bool initialized_;
